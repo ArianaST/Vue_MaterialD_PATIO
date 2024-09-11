@@ -3,10 +3,9 @@ import { RouterLink } from "vue-router";
 import { ref, watch } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 
-// images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import downArrow from "@/assets/img/down-arrow.svg";
-import DownArrWhite from "@/assets/img/down-arrow-white.svg";
+import DownArrWhite from "@/assets/img/down-arrow-red.svg";
 
 const props = defineProps({
   action: {
@@ -67,7 +66,6 @@ const getTextColor = () => {
   return color;
 };
 
-// set nav color on mobile && desktop
 
 let textDark = ref(props.darkText);
 const { type } = useWindowsWidth();
@@ -91,7 +89,7 @@ watch(
 </script>
 <template>
   <nav
-    class="navbar navbar-expand-lg top-0"
+    class="navbar bg-blue navbar-expand-lg top-0"
     :class="{
       'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3':
         props.transparent,
@@ -118,9 +116,15 @@ watch(
         :to="{ name: 'presentation' }"
         rel="tooltip"
         title="Designed and Coded by Creative Tim"
-        data-placement="bottom"
+        data-placement="bottom-image"
       >
-        Material Kit 2
+      <img
+                src="\src\assets\img\PATITO_sn.png"
+                class="icon"
+                alt="icon"
+                style="width: 20px; height: 20px"
+              />
+        PATITO
       </RouterLink>
       <RouterLink
         class="navbar-brand d-block d-md-none"
@@ -132,9 +136,9 @@ watch(
         to="/"
         rel="tooltip"
         title="Designed and Coded by Creative Tim"
-        data-placement="bottom"
+        data-placement="bottom-image"
       >
-        Material Design
+        PATITO
       </RouterLink>
       <a
         href="https://www.creative-tim.com/product/vue-material-kit-pro"

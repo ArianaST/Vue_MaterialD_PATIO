@@ -12,8 +12,9 @@ const bgImage =
       class="navbar navbar-expand-lg navbar-dark navbar-absolute bg-transparent shadow-none"
     >
       <div class="container">
+        <link rel="icon" type="image/png" sizes="30x30" href="./assets/img/PATITO_sn.png">
         <a class="navbar-brand text-white" href="javascript:;"
-          >Material Design</a
+          >PATITO</a
         >
         <button
           class="navbar-toggler"
@@ -29,7 +30,7 @@ const bgImage =
         <div class="collapse navbar-collapse" id="navbar-header-2">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <RouterLink class="nav-link text-white" to="#"> Home </RouterLink>
+              <RouterLink class="nav-link text-white" to="#"> Inicio </RouterLink>
             </li>
             <li class="nav-item">
               <RouterLink class="nav-link text-white" to="#">
@@ -85,7 +86,7 @@ const bgImage =
           <div
             class="col-lg-6 col-md-7 d-flex justify-content-center flex-column"
           >
-            <h1 class="text-white mb-4">Material Kit</h1>
+            <h1 class="text-white mb-4">PATITO</h1>
             <p class="text-white opacity-8 lead pe-5 me-5">
               The time is now for it be okay to be great. People in this world
               shun people for being nice.

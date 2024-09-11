@@ -65,7 +65,7 @@ onUnmounted(() => {
             Parkinson Disease Assessment via Telemonitoring and Intelligence Technology Outcomes.
             </h2>
             <p class="lead text-white px-5 mt-3" :style="{ fontWeight: '500' }">
-              ¡Gracia spor visitarnos!
+              ¡Gracias por visitarnos!
             </p>
           </div>
         </div>

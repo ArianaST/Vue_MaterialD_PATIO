@@ -41,7 +41,7 @@ const props = defineProps({
   }
 });
 
-// set arrow  color
+//FLECHAS
 function getArrowColor() {
   if (props.transparent && textDark.value) {
     return ArrDark;

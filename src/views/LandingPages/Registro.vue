@@ -2,8 +2,9 @@
 import { onMounted, onUnmounted } from "vue";
 
 //example components
-import DefaultNavbar from "../../../examples/navbars/NavbarDefault.vue";
-import DefaultFooter from "../../../examples/footers/FooterDefault.vue";
+import NavbarDefault from "../../examples/navbars/NavbarDefault.vue";
+import FooterDefault from "../../examples/footers/FooterDefault.vue";
+import Formulario from "./Formulario.vue";
 
 //image
 import bg0 from "@/assets/img/bg9.jpg";
@@ -11,14 +12,6 @@ import bg0 from "@/assets/img/bg9.jpg";
 //dep
 import Typed from "typed.js";
 
-//sections
-import Information from "./Sections/AboutInformation.vue";
-import AboutTeam from "./Sections/AboutTeam.vue";
-import Featuring from "./Sections/AboutFeaturing.vue";
-import Newsletter from "./Sections/AboutNewsletter.vue";
-import Banner from "./Sections/SobreNosotros.vue";
-import Beneficiarios from "./Sections/Beneficiarios.vue";
-import Participantes from "./Sections/Participantes.vue";
 
 const body = document.getElementsByTagName("body")[0];
 //hooks
@@ -38,21 +31,19 @@ onMounted(() => {
     });
   }
 });
-
 onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
 });
 </script>
 <template>
-  <DefaultNavbar
-    :action="{
-      route: 'javascript:;',
-      label: 'Buy Now',
-      color: 'btn-white',
-    }"
-    transparent
-  />
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <NavbarDefault :sticky="true" />
+      </div>
+    </div>
+  </div>
   <header class="bg-gradient-dark">
     <div
       class="page-header min-vh-75"
@@ -81,8 +72,8 @@ onUnmounted(() => {
   </header>
   <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
     <Banner/>
-    <Beneficiarios/>
-    <Participantes/>
+    <Information />
+    <Formulario/>
     <!-- <AboutTeam />
     <Featuring />
     <Newsletter /> -->

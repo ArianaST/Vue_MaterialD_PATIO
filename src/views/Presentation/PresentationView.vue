@@ -1,27 +1,27 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
+import { RouterLink } from "vue-router";
+
+
 
 //example components
-import NavbarDefault from "../..//examples/navbars/NavbarDefault.vue";
+import NavbarDefault from "../../examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../../examples/footers/FooterDefault.vue";
 import Header from "../../examples/Header.vue";
-import FilledInfoCard from "../../examples/cards/infoCards/FilledInfoCard.vue";
+import DefaultCounterCard from "../../examples/cards/counterCards/DefaultCounterCard.vue";
+
 
 //Vue Material Kit 2 components
+import MaterialButton from "@/components/MaterialButton.vue";
 import MaterialSocialButton from "@/components/MaterialSocialButton.vue";
 
 // sections
-import PresentationCounter from "./Sections/PresentationCounter.vue";
-import PresentationPages from "./Sections/PresentationPages.vue";
-import PresentationExample from "./Sections/PresentationExample.vue";
-import data from "./Sections/Data/designBlocksData";
-import BuiltByDevelopers from "./Components/BuiltByDevelopers.vue";
-import PresentationTestimonials from "./Sections/PresentationTestimonials.vue";
+import AuthorProfile from "/src/views/LandingPages/Author/Sections/AuthorProfile.vue";
 import PresentationInformation from "./Sections/PresentationInformation.vue";
+import AuthorPosts from "../LandingPages/Author/Sections/AuthorPosts.vue";
 
 //images
-import vueMkHeader from "@/assets/img/vue-mk-header.jpg";
-import wavesWhite from "@/assets/img/waves-white.svg";
+
 import logoBootstrap from "@/assets/img/logos/bootstrap5.jpg";
 import logoTailwind from "@/assets/img/logos/icon-tailwind.jpg";
 import logoVue from "@/assets/img/logos/vue.jpg";
@@ -29,22 +29,27 @@ import logoAngular from "@/assets/img/logos/angular.jpg";
 import logoReact from "@/assets/img/logos/react.jpg";
 import logoSketch from "@/assets/img/logos/sketch.jpg";
 
-//hooks
+
+
+
 const body = document.getElementsByTagName("body")[0];
 onMounted(() => {
-  body.classList.add("presentation-page");
+  body.classList.add("presentation");
   body.classList.add("bg-gray-200");
 });
 onUnmounted(() => {
-  body.classList.remove("presentation-page");
+  body.classList.remove("presentation");
   body.classList.remove("bg-gray-200");
 });
+
+
+
 </script>
 
 <template>
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
-      <div class="col-12">
+      <div class="col-10 ">
         <NavbarDefault :sticky="true" />
       </div>
     </div>
@@ -52,231 +57,108 @@ onUnmounted(() => {
   <Header>
     <div
       class="page-header min-vh-75"
-      :style="`background-image: url(${vueMkHeader})`"
+      :style="`background-image: url(./src/assets/img/HeaderInicio.png)`"
       loading="lazy"
     >
+    <span class="mask bg-gradient-dark opacity-5"></span>
       <div class="container">
-        <div class="row">
-          <div class="col-lg-7 text-center mx-auto position-relative">
-            <h2
-              class="text-white pt-3 mt-n5 me-2"
-              :style="{ display: 'inline-block ' }"
+    <div class="row d-flex justify-content-end mx-auto " style="margin-top: -200px;">
+      <div class="col-lg-8 text-end " >
+            <h1
+              class="text pt-2 "
+              :style="{ color: '#840705'  }"
             >
             Parkinson Disease Assessment via Telemonitoring and Intelligence Technology Outcomes.
-            </h2>
-            <p class="lead text-white px-5 mt-3" :style="{ fontWeight: '500' }">
-              ¡Gracias por visitarnos!
-            </p>
+            </h1>
+            <div class="text-sm mb-0 py-0 align-items-center d-flex justify-content-end">
+              <samp class="mr-2 text-end"
+              :style="{ color: 'white'  }"> Total de personas que forman parte del registro:     </samp>
+            <DefaultCounterCard
+             color="light"
+            class="ml-3 "
+            :count="10"
+            suffix="+"
+            :duration="3000"
+            divider="vertical"/>
           </div>
         </div>
-      </div>
+        <RouterLink to="/pages/landing-pages/Registro"> 
+          <div class="row d-flex justify-content-end mt-3 me-2">
+          <MaterialButton variant="gradient" color="primary" class="w-auto mt-1">
+            Registrarse
+          </MaterialButton>
+         </div>
+        </RouterLink>
+        </div>
+         </div>
     </div>
   </Header>
-
-  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-    <PresentationCounter />
+  
+  <div class="card card-body blur shadow-blur mx-2 mx-md-4 mt-n6 mb-8">
+    <AuthorProfile/>
+    <div class="container">
+  <div class="row">
+  <section class="py-0 pb-6 " id="count-stats">
+      <div class="d-flex justify-content-center text-center">
+        <div class="col-md-3 position-relative">
+          <DefaultCounterCard
+            color="dark"
+            title="ESTADOS"
+            description="Total de estados que forman parte:"
+            :count="10"
+            suffix="+"
+            :duration="3000"
+            divider="vertical" 
+          />
+        </div>
+        <div class="col-md-3">
+          <DefaultCounterCard
+           color="dark"
+            title="REGISTROS"
+            description="Total de registros actuales:"
+            :count="1200"
+            suffix="+"
+            :duration="3000"
+            divider="vertical" 
+          />
+        </div>
+      </div>
+  </section>
+</div>
+</div>
     <PresentationInformation />
-    <PresentationExample :data="data" />
-    <PresentationPages />
-    <BuiltByDevelopers />
-
+    <AuthorPosts />
+    <inline>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <FilledInfoCard
-            class="p-4"
-            :color="{ text: 'white', background: 'bg-gradient-success' }"
-            :icon="{ component: 'flag', color: 'white' }"
-            title="Getting Started"
-            description="Check the possible ways of working with our product and the necessary files for building your own project."
-            :action="{
-              route:
-                'https://www.creative-tim.com/learning-lab/vue/overview/material-kit/',
-              label: { text: 'Let\'s start', color: 'white' }
-            }"
-          />
-        </div>
-        <div class="col-lg-4">
-          <FilledInfoCard
-            class="px-lg-1 mt-lg-0 mt-4 p-4"
-            height="h-100"
-            :icon="{ component: 'precision_manufacturing', color: 'success' }"
-            title="Plugins"
-            description="Get inspiration and have an overview about the plugins that we
-                used to create the Material Kit."
-            :action="{
-              route:
-                'https://www.creative-tim.com/learning-lab/vue/input/material-kit/',
-              label: { text: 'Read more' }
-            }"
-          />
-        </div>
-        <div class="col-lg-4">
-          <FilledInfoCard
-            class="px-lg-1 mt-lg-0 mt-4 p-4"
-            :icon="{ component: 'receipt_long', color: 'success' }"
-            title="Utility Classes"
-            description="Material Kit is giving you a lot of pre-made elements. For those
-                who want flexibility, we included many utility classes."
-            :action="{
-              route:
-                'https://www.creative-tim.com/learning-lab/vue/utilities/material-kit/',
-              label: { text: 'Read more' }
-            }"
-          />
-        </div>
-      </div>
-    </div>
-    <PresentationTestimonials />
-
-    <div
-      class="container-fluid mt-sm-5 border-radius-xl"
-      :style="{
-        background: 'linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25))'
-      }"
-    >
-      <div
-        class="page-header py-6 py-md-5 my-sm-3 mb-3 border-radius-xl"
-        :style="{
-          backgroundImage: `url(${wavesWhite})`
-        }"
-        loading="lazy"
-      >
-        <span class="mask bg-gradient-dark"></span>
-        <div class="container">
-          <div class="row">
-            <div class="d-flex justify-content-center p-5">
-              <div class="col-lg-8 ms-lg-5 text-center">
-                <h3 class="text-white">
-                  Do you love this awesome UI Kit from Vuejs & Bootstrap?
-                </h3>
-                <p class="text-white text-md">
-                  Cause if you do, it can be yours for FREE. Hit the button
-                  below to navigate to Creative Tim where you can <br />
-                  find the Design System in HTML. Start a new project or give an
-                  old Bootstrap project a new look!
-                </p>
-
-                <a
-                  href="https://www.creative-tim.com/product/vue-material-kit"
-                  class="btn btn-sm mb-0 bg-gradient-success px-5 py-3 mt-4"
-                  >Download Now</a
-                >
-              </div>
-            </div>
+    <div class="row">
+      <div class="d-flex flex-column w-100 text-center p-6 mb-4">
+        <h3>Patrocinadores</h3>
+    <div class="carousel">
+          <div class="carousel-inner">
+            <img v-for="(logo, index) in logos" :key="index" :src="logo" class="carousel-image" />
           </div>
+       
         </div>
       </div>
     </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="d-flex flex-column w-100 text-center p-5 mb-8">
-          <h3>Available on these technologies</h3>
-          <div class="d-flex justify-content-center mt-3 flex-wrap">
-            <a
-              href="https://www.creative-tim.com/product/material-kit"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Bootstrap 5 - Most popular front-end component library"
-            >
-              <img
-                :src="logoBootstrap"
-                alt="title"
-                loading="lazy"
-                :style="{ height: '90px' }"
-              />
-            </a>
-            <a
-              class="opacity-5 ms-3"
-              href="#"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Coming Soon"
-            >
-              <img
-                :src="logoTailwind"
-                alt="title"
-                loading="lazy"
-                :style="{ height: '90px' }"
-              />
-            </a>
-            <a
-              href="https://www.creative-tim.com/product/vue-material-kit-pro"
-              class="mx-3"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Vue.js - Is a Progressive JavaScript Framework"
-            >
-              <img
-                :src="logoVue"
-                alt="title"
-                loading="lazy"
-                :style="{ height: '90px' }"
-              />
-            </a>
-            <a
-              class="opacity-5"
-              href="#"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Coming Soon"
-            >
-              <img
-                :src="logoAngular"
-                alt="title"
-                loading="lazy"
-                :style="{ height: '90px' }"
-              />
-            </a>
-            <a
-              href="https://www.creative-tim.com/product/material-kit-react-pro"
-              class="mx-3"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="React – A JavaScript library for building user interfaces"
-            >
-              <img
-                :src="logoReact"
-                alt="title"
-                loading="lazy"
-                :style="{ height: '90px' }"
-              />
-            </a>
-            <a
-              class="opacity-5"
-              href="#"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Coming Soon"
-            >
-              <img
-                :src="logoSketch"
-                alt="title"
-                loading="lazy"
-                :style="{ height: '90px' }"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="py-5">
+  </inline>
+    <div class="py-4">
       <div class="container">
         <div class="row">
-          <div class="col-lg-5 ms-auto">
-            <h4 class="mb-1">Thank you for your support!</h4>
-            <p class="lead mb-0">We deliver the best web products</p>
+          <div class="text-center mt-3 ms-auto">
+            <h4 class="mb-0">¡Gracias por tú registro!</h4>
+            <p class="lead mb-0">Siguenos</p>
           </div>
-          <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
+          <div class="text-center mt-4">
             <MaterialSocialButton
-              route="https://twitter.com/intent/tweet?text=Check%20Material%20Design%20System%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-design-system-pro"
+              route=""
               component="twitter"
               color="twitter"
               label="Tweet"
             />
             <MaterialSocialButton
-              route="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-design-system-pro"
+              route=""
               component="facebook-square"
               color="facebook"
               label="Share"
@@ -294,3 +176,68 @@ onUnmounted(() => {
   </div>
   <DefaultFooter />
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      currentIndex: 0,
+      logos: [
+        logoBootstrap,
+        logoTailwind,
+        logoVue,
+        logoAngular,
+        logoReact,
+        logoSketch
+      ],
+    };
+  },
+  methods: {
+    goToSlide(index) {
+      this.currentIndex = index;
+    },
+  },
+};
+</script>
+
+<style scoped>
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  display: flex;
+  width: 100%; /* 100% * número de logos */
+  animation: slide 12s infinite; /* Ajusta el tiempo total de la animación */
+}
+
+.carousel-image {
+  width: 16.66%; /* 100 / número de logos */
+  height: auto;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  16.66% {
+    transform: translateX(-16.66%);
+  }
+  33.33% {
+    transform: translateX(-33.33%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  66.66% {
+    transform: translateX(-33.33%);
+  }
+  83.33% {
+    transform: translateX(-16.66%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+</style>

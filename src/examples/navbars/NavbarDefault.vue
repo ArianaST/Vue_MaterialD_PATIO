@@ -5,6 +5,11 @@ import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import downArrow from "@/assets/img/down-arrow.svg";
+import DownArrWhite from "@/assets/img/down-arrow-white.svg";
+import { getActivePinia } from "pinia";
+import Registro from "../../views/LandingPages/Registro.vue";
+
+
 
 
 const props = defineProps({
@@ -76,65 +81,69 @@ watch(
     }
   }
 );
+
+
+
 </script>
 <template>
   <nav
-    class="navbar bg-blue navbar-expand-lg top-0"
+    class="navbar bg-white navbar-expand w-100 top-0" 
+    
     :class="{
-      'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3':
+      ' z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3':
         props.transparent,
-      'my-3 blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0 mx-4 position-absolute mt-4':
+      ' my-3 blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0 mx-4 position-absolute mt-4':
         props.sticky,
       'navbar-light bg-white py-3': props.light,
-      ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark
+      'navbar-dark bg-gradient-dark z-index-3 py-3': props.dark,
+      
+    
     }"
+  
   >
     <div
       :class="
         props.transparent || props.light || props.dark
           ? 'container'
-          : 'container-fluid px-0'
-      "
+          : 'container-fluid px-0 '"
     >
       <RouterLink
         class="navbar-brand d-none d-md-block"
+        :style="{ color: '#840705' } "
         :class="[
           (props.transparent && textDark.value) || !props.transparent
-            ? 'text-dark font-weight-bolder ms-sm-3'
-            : 'text-white font-weight-bolder ms-sm-3'
+            ? 'color text-center font-weight-bolder ms-sm-3'
+            : 'text-dark font-weight-bolder ms-sm-3 mb-1'
         ]"
-        :to="{ name: 'presentation' }"
+        :to="{name: 'presentation'}"
         rel="tooltip"
-        title="Designed and Coded by Creative Tim"
+        title="PATITO"
         data-placement="bottom-image"
       >
       <img
                 src="\src\assets\img\PATITO_sn.png"
-                class="icon"
+                class="icon ms-sm-3 mb-1 mx-0"
                 alt="icon"
-                style="width: 20px; height: 20px"
+                style="width: 30px; height: 30px"
               />
         PATITO
       </RouterLink>
       <RouterLink
         class="navbar-brand d-block d-md-none"
+        :active-class="{ color: '#840705' } "
         :class="
           props.transparent || props.dark
-            ? 'text-white'
+            ? 'text-dark'
             : 'font-weight-bolder ms-sm-3'
         "
         to="/"
         rel="tooltip"
-        title="Designed and Coded by Creative Tim"
+        title="PATITO"
         data-placement="bottom-image"
       >
         PATITO
       </RouterLink>
-      <a
-        href="https://www.creative-tim.com/product/vue-material-kit-pro"
-        class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block"
-        >Buy Now</a
-      >
+      
       <button
         class="navbar-toggler shadow-none ms-2"
         type="button"
@@ -148,72 +157,70 @@ watch(
           <span class="navbar-toggler-bar bar1"></span>
           <span class="navbar-toggler-bar bar2"></span>
           <span class="navbar-toggler-bar bar3"></span>
+          <span class="navbar-toggler-bar bar4"></span>
+          <span class="navbar-toggler-bar bar5"></span>
         </span>
       </button>
+
       <div
-        class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0"
+        class="collapse navbar-collapse w-100 pt-7 pb-8 py-lg-0"
         id="navigation"
       >
+      <ul class=" navbar-nav navbar-nav-hover ms-auto">
+      <li class="nav-item dropdown dropdown-hover mx-2">
+        
       <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-2 mt-0 ">
-        <RouterLink to="/pages/landing-pages/about-us">
-          <h6
-            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
-          >
-            Inicio
-          </h6>
-        </RouterLink>
-      </div>
-      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-2 mt-0 ">
-        <RouterLink to="/pages/landing-pages/Registro">
-          <h6
-            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
-          >
-            Registro
-          </h6>
-        </RouterLink>
-      </div>
-      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-2 mt-0 ">
-        <RouterLink to="/pages/landing-pages/about-us">
-          <h6
-            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
-          >
-            Datos
-          </h6>
-        </RouterLink>
-      </div>
-      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-2 mt-0 ">
-        <RouterLink to="/pages/landing-pages/about-us">
-          <h6
-            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
-          >
-            Acerca de
-          </h6>
-        </RouterLink>
-      </div>
-      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-2 mt-0 ">
-        <RouterLink to="/pages/landing-pages/about-us">
-          <h6
-            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
-          >
-            Contacto
-          </h6>
-        </RouterLink>
-      </div>
-        <ul class="navbar-nav navbar-nav-hover ms-auto">
-          <li class="nav-item dropdown dropdown-hover mx-2">
-            <a
-              role="button"
-              class="nav-link ps-2 d-flex cursor-pointer align-items-center"
-              :class="getTextColor()"
-              id="dropdownMenuPages"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i
-                class="material-icons opacity-6 me-2 text-md"
+        <RouterLink to="/"
+        >
+          <i class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
                 :class="getTextColor()"
-                >dashboard</i
-              >
+                ></i>
+            Inicio
+
+        </RouterLink>
+      </div>
+    </li>
+      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-3 mt-0 "> 
+        <RouterLink to="/pages/landing-pages/Registro" @click.prevent="showModal">
+          <i class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
+                :class="getTextColor()"
+                ></i>
+                Registro
+                
+        </RouterLink>
+        <Model :isModalVisible="isModalVisible" @update:isModalVisible="isModalVisible = $event"/>
+      </div>
+
+      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-3 mt-0 ">
+        <RouterLink to="/pages/landing-pages/about-us">
+                Datos
+        </RouterLink>
+      </div>
+      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-3 mt-0 ">
+        <RouterLink to="/pages/landing-pages/about-us">
+          <i class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
+                :class="getTextColor()"
+                ></i>
+            Acerca de
+            <img
+                            :src="downArrow"
+                            alt="down-arrow"
+                            class="arrow  ms-auto"
+                          />
+        
+        </RouterLink>
+      </div>
+      
+      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-3 mt-0 ">
+        <RouterLink to="/pages/landing-pages/about-us">
+          <i class="dropdown-header text-dark font-weight-bolder d-flex justify-content-center align-items-center p-0"
+                :class="getTextColor()"
+                ></i>
+            Contacto
+        </RouterLink>
+      </div>
+    </ul>
+
               <!-- Pages
               <img
                 :src="getArrowColor()"
@@ -954,12 +961,27 @@ watch(
             > -->
               
               
-            </a>
-          </li>
-        </ul>
-
+      
       </div>
-    </div>
+      </div>
+      
   </nav>
   <!-- End Navbar -->
 </template>
+<script>
+export default {
+  components: {
+    Registro
+  },
+  data() {
+    return {
+      isModalVisible: true
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true; // Muestra el modal
+    }
+  }
+};
+</script>

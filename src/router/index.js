@@ -32,6 +32,7 @@ const router = createRouter({
       name: "presentation",
       component: PresentationView,
     },
+
     {
       path: "/pages/landing-pages/about-us",
       name: "about",

@@ -1,17 +1,6 @@
 <script setup>
-import logoDark from "@/assets/img/logo-ct-dark.png";
+import logoDark from "@/assets/img/PATITO_sn.png";
 defineProps({
-  brand: {
-    type: Object,
-    name: String,
-    logo: String,
-    route: "",
-    default: () => ({
-      name: "Material Kit 2",
-      logo: logoDark,
-      route: "/"
-    })
-  },
   socials: {
     type: Array,
     icon: String,
@@ -19,26 +8,35 @@ defineProps({
     default: () => [
       {
         icon: '<i class="fab fa-facebook text-lg opacity-8"></i>',
-        link: "https://www.facebook.com/CreativeTim/"
+        link: "https://www.facebook.com"
       },
       {
         icon: '<i class="fab fa-twitter text-lg opacity-8"></i>',
-        link: "https://twitter.com/creativetim"
+        link: "https://twitter.com"
       },
       {
-        icon: '<i class="fab fa-dribbble text-lg opacity-8"></i>',
-        link: "https://dribbble.com/creativetim"
-      },
-      {
-        icon: '<i class="fab fa-github text-lg opacity-8"></i>',
-        link: "https://github.com/creativetimofficial"
+        icon: '<i class="fab fa-instagram text-lg opacity-8"></i>',
+        link: "https://instagram.com"
       },
       {
         icon: '<i class="fab fa-youtube text-lg opacity-8"></i>',
-        link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w"
+        link: "https://www.youtube.com/"
       }
     ]
   },
+  
+  brand: {
+    type: Object,
+    name: String,
+    logo: String,
+    route: "",
+    default: () => ({
+      name: "PATITO.",
+      logo: logoDark,
+      route: "/"
+    })
+  },
+ 
   menus: {
     type: Array,
     name: String,
@@ -123,16 +121,10 @@ defineProps({
 });
 </script>
 <template>
-  <footer class="footer pt-5 mt-5">
+  <footer class="footer pt-3 mt-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 mb-4 ms-auto">
-          <div>
-            <a :href="brand.route">
-              <img :src="brand.logo" class="mb-3 footer-logo" alt="main_logo" />
-            </a>
-            <h6 class="font-weight-bolder mb-4">{{ brand.name }}</h6>
-          </div>
+        <div class="col-md-3 mb-6 ms-auto">
           <div>
             <ul class="d-flex flex-row ms-n3 nav">
               <li
@@ -150,6 +142,13 @@ defineProps({
               </li>
             </ul>
           </div>
+          <div>
+            <a :href="brand.route">
+              <img :src="brand.logo" class="mb-0 footer-logo" alt="main_logo" />
+            </a>
+            <h6 class="font-weight-bolder mb-2">{{ brand.name }}</h6>
+          </div>
+         
         </div>
         <div
           class="col-md-2 col-sm-6 col-6 mb-4"
@@ -172,9 +171,7 @@ defineProps({
               All rights reserved. Copyright ©
               {{ new Date().getFullYear() }}
               Material Kit by
-              <a href="https://www.creative-tim.com" target="_blank"
-                >Creative Tim</a
-              >.
+
             </p>
           </div>
         </div>

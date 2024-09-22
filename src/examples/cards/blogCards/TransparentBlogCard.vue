@@ -19,7 +19,7 @@ defineProps({
     label: String,
     default: () => ({
       route: "javascript:;",
-      color: "success",
+      color: "primary",
       label: "Read more",
     }),
   },

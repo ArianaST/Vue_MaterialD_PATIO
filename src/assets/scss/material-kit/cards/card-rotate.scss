@@ -1,3 +1,7 @@
+$text-gradient-bg-white: #840705;
+$text-number: #3B4754 ;
+
+
 .rotating-card-container {
   @include perspective(800px);
 
@@ -19,33 +23,18 @@
     .front {
       @include backface-visibility(hidden);
       position: absolute;
-      background-color: $white;
+      background-color: $text-number; // Color de fondo para las tarjetas
       border-radius: $border-radius-lg;
       top: 0;
       left: 0;
       justify-content: center;
       align-content: center;
-      display: -webkit-flex;
-      display: -moz-flex;
-      display: -ms-flexbox;
-      display: -o-flex;
-      display: flex;
-      -moz-flex-direction: column;
-      -ms-flex-direction: column;
-      -o-flex-direction: column;
-      flex-direction: column;
+      display: flex; // Simplificado
 
       .card-body {
         justify-content: center;
         align-content: center;
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flexbox;
-        display: -o-flex;
         display: flex;
-        -moz-flex-direction: column;
-        -ms-flex-direction: column;
-        -o-flex-direction: column;
         flex-direction: column;
       }
 
@@ -59,7 +48,7 @@
         top: 0;
         content: "";
         border-radius: $border-radius-lg;
-        background-image: $text-gradient-bg-success;
+        background-image: linear-gradient(to right, $text-gradient-bg-white, darken($text-gradient-bg-white, 10%)); // Mantener para efectos
         opacity: 0.85;
       }
     }
@@ -113,6 +102,7 @@
       text-align: left;
     }
   }
+  
 }
 
 .back-background {
@@ -121,9 +111,13 @@
     padding-top: 15px;
     padding-bottom: 15px;
   }
+
+  .number-color {
+    color: #3B4754;
+  }
 }
 
-/*       Fix bug for IE      */
+/* Fix bug for IE */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .rotating-card-container .card .back,
   .rotating-card-container .card .front {

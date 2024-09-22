@@ -19,6 +19,7 @@ defineProps({
     color: String,
     required: true,
   },
+
 });
 </script>
 <template>
@@ -29,7 +30,7 @@ defineProps({
       backgroundSize: 'cover',
     }"
   >
-    <div class="card-body pt-7 text-center">
+    <div class="card-body pt-7 text-center" >
       <h3 class="text-white" v-html="title"></h3>
       <p class="text-white opacity-8">
         {{ description }}

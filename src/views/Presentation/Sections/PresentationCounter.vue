@@ -3,10 +3,10 @@ import DefaultCounterCard from "../../../examples/cards/counterCards/DefaultCoun
 </script>
 
 <template>
-  <section class="pt-3 pb-4" id="count-stats">
+  <section class=" pt-3 pb-4" id="count-stats">
     <div class="container">
       <div class="row">
-        <div class="col-lg-9 z-index-2 border-radius-xl mx-auto py-3">
+        <div class="p-2 col-lg-9 z-index-2 border-radius-xl mx-auto py-3">
           <div class="row">
             <div class="col-md-4 position-relative">
               <DefaultCounterCard

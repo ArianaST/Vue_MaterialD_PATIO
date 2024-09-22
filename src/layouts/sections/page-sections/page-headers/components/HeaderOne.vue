@@ -13,7 +13,7 @@ const bgImage =
     >
       <div class="container">
         <link rel="icon" type="image/png" sizes="30x30" href="./assets/img/PATITO_sn.png">
-        <a class="navbar-brand text-white" href="javascript:;"
+        <a class="navbar-brand text-red" href="javascript:;"
           >PATITO</a
         >
         <button

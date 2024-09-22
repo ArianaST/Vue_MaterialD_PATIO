@@ -10,14 +10,18 @@ import post3 from "@/assets/img/examples/blog-9-4.jpg";
 import post4 from "@/assets/img/examples/blog2.jpg";
 </script>
 <template>
-  <section class="py-3">
+  <section class="py-4">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h3 class="mb-5">Check my latest blogposts</h3>
+      <div class="row ">
+        <div class="d-flex flex-column text-center p-3 mb-3">
+          <div class="d-flex mx-auto text-center">
+          <h2 class="mb-2">Cono</h2>
+          <h2 class="text-gradient text-primary mb-0">cenos</h2>
+        </div>
+          <p clas="mb-0" >Somos un equipo de investigadores y desarrolladores......</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row flex-wrap justify-content-between">
         <div class="col-lg-3 col-sm-6">
           <TransparentBlogCard
             :image="post1"
@@ -39,13 +43,7 @@ import post4 from "@/assets/img/examples/blog2.jpg";
             description="If you’ve ever wanted to train a machine learning model and integrate it with IFTTT, you now can with ..."
           />
         </div>
-        <div class="col-lg-3 col-md-12 col-12">
-          <BackgroundBlogCard
-            :image="post4"
-            title="Flexible work hours"
-            description="Rather than worrying about switching offices every couple years, you stay in the same place."
-          />
-        </div>
+        
       </div>
     </div>
   </section>

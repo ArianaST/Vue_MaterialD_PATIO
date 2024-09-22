@@ -38,22 +38,29 @@ defineProps({
   },
   divider: {
     validator(value) {
-      return ["vertical", "horizontal"].includes(value);
+      return ["vertical"].includes(value);
     },
   },
 });
 </script>
 <template>
-  <div class="text-center">
-    <h1 :class="`text-gradient text-${color ?? 'success'}`">
-      <CountTo :start-val="0" :end-val="count" :duration="duration" />{{
-        suffix
-      }}
-    </h1>
-    <h5 class="mt-3">{{ title }}</h5>
-    <p class="text-sm font-weight-normal">
+    <div class="p-0">
+    <h5 class="mb-0">{{ title }}</h5>
+    <p class="mb-2 text-right font-weight-normal ">
       {{ description }}
     </p>
+
+  <hr :class="`${divider ? divider : ''} `" />
+  <div class="text-right">
+    <div :style="{ color: color }">
+    <h1 :class="` text-${color ?? 'white'}`">
+      {{
+        suffix
+      }}
+      <CountTo :start-val="0" :end-val="count" :duration="duration" />
+      <hr :class="`${divider ? divider : ''} dark`" />
+    </h1>
   </div>
-  <hr :class="`${divider ? divider : ''} dark`" />
+</div>
+  </div>
 </template>

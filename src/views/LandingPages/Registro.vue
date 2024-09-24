@@ -45,10 +45,46 @@ onUnmounted(() => {
 });
 </script>
 
-
- 
 <template>
-   
+<div class="modal show fade  "  style="display: block;" aria-hidden="true" >
+  <div class="modal-overlay" >
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aviso de privacidad</h5>
+          <MaterialButton
+                  color="none"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">
+                </MaterialButton>
+        </div>
+        <div class="modal-body">
+          Society has put up so many boundaries, so many limitations on
+          what’s right and wrong that it’s almost impossible to get a pure
+          thought out.
+          <br /><br />
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus culpa recusandae quisquam ipsam aliquam corporis molestiae provident necessitatibus maiores voluptatum repellendus ducimus labore totam ipsum vero eaque, quia amet voluptates?
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nemo molestias aperiam rem velit ea voluptas quibusdam quis delectus! Aspernatur provident sunt dolores optio, vel porro a dicta aut earum!
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam facere tempora optio voluptates veritatis vitae quod quisquam officiis repellendus ad, eligendi eveniet modi sapiente dignissimos laborum accusantium voluptatem obcaecati mollitia.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae enim repellendus, dolor impedit assumenda iusto reiciendis eos labore commodi ipsam sed ratione, fugit illum, quod vero quasi. Minus, nobis maiores.
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Eligendi placeat amet consectetur soluta maxime aut commodi, minima voluptas culpa mollitia facilis autem a quae ipsum error tenetur non ipsam nemo?</p>
+        </div>
+        <div class="modal-footer justify-content-end">
+          <MaterialButton
+                  variant="gradient"
+                  color="success"
+                  data-bs-dismiss="modal"
+                  @click="closeModal">
+            Acepto el aviso de privacidad
+          </MaterialButton>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -58,7 +94,7 @@ onUnmounted(() => {
   </div>
   <header class="bg-gradient-dark">
     <div
-      class="page-header min-vh-75"
+      class="page-header min-vh-95"
       :style="{ backgroundImage: `url(${bg0})` }"
     >
       <span class="mask bg-gradient-dark opacity-6"></span>
@@ -118,9 +154,7 @@ onUnmounted(() => {
             Registrarse
           </MaterialButton>
         </div>
-    <!-- <AboutTeam />
-    <Featuring />
-    <Newsletter /> -->
+
             </div>
           </div>
           </div>
@@ -135,21 +169,19 @@ onUnmounted(() => {
 export default {
   data() {
     return {
-      isModalVisible: true, // Modal visible al iniciar
-      showErrorAnimation: false, // Controla la animación de error
+      isModalVisible: true,
+      showErrorAnimation: false,
     };
   },
   methods: {
     closeModal() {
-      // Aquí podrías poner alguna validación antes de cerrar
       this.isModalVisible = false;
     },
     handleClose() {
-      // Disparar la animación si el modal es requerido
       this.showErrorAnimation = true;
       setTimeout(() => {
-        this.showErrorAnimation = false; // Detener la animación después de cierto tiempo
-      }, 100); // Duración de la animación
+        this.showErrorAnimation = false;
+      }, 80);
     },
   },
 };
@@ -168,19 +200,19 @@ export default {
 }
 
 .modal-overlay {
-  position: fixed;
+  position: auto;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: auto;
   justify-content: center;
   align-items: center;
-  z-index: 1040;
+  z-index: auto;
 }
 
 .modal-dialog {
-  z-index: 1050;
+  z-index: auto;
 }
 </style>

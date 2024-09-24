@@ -271,7 +271,7 @@ export default {
 /* Espaciado del texto de bienvenida */
 h2 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: dark;
 }
 
@@ -282,7 +282,7 @@ h2 {
 }
 
 .tabs button {
-  padding: 10px 15px;
+  padding: 10px 10px;
   border: none;
   background-color: #f0f0f0;
   cursor: pointer;

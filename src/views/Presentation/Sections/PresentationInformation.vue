@@ -108,14 +108,14 @@ import RotatingCardBack from "../../../examples/cards/rotatingCards/RotatingCard
         <div class="col-lg-4 col-md-6 mb-4">
      <RotatingCard>
             <RotatingCardFront
-              image="https://www.scielo.org.mx/img/revistas/spm/v62n6//0036-3634-spm-62-06-873-gf1.png"
+              image="https://www.parkinson.org/sites/default/files/styles/no_sizing/public/images/environmentalfactors.jpg?itok=pZYM0ncD"
               icon="touch_app"
               title="Factores de riesgo de la Enfermedad de Parkinson"
 
             />
 
             <RotatingCardBack
-              image="https://www.scielo.org.mx/img/revistas/spm/v62n6//0036-3634-spm-62-06-873-gf1.png"
+              image="https://www.parkinson.org/sites/default/files/styles/no_sizing/public/images/environmentalfactors.jpg?itok=pZYM0ncDg"
               description="You will save a lot of time going from prototyping to full-functional
                 code because all elements are implemented."
               :action="[

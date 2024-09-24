@@ -56,30 +56,37 @@ onUnmounted(() => {
   </div>
   <Header>
     <div
-      class="page-header min-vh-75"
-      :style="`background-image: url(./src/assets/img/HeaderInicio.png)`"
-      loading="lazy"
-    >
+    class="page-header min-vh-95"
+    :style="{
+      backgroundImage: 'url(./src/assets/img/HeaderInicio.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }"
+    loading="lazy"
+  >
     <span class="mask bg-gradient-dark opacity-5"></span>
       <div class="container">
     <div class="row d-flex justify-content-end mx-auto " style="margin-top: -200px;">
-      <div class="col-lg-8 text-end " >
-            <h1
-              class="text pt-2 "
+      <div class="col-lg-8 text-end" >
+            <h2
+              class="text pt-12 "
               :style="{ color: '#840705'  }"
             >
             Parkinson Disease Assessment via Telemonitoring and Intelligence Technology Outcomes.
-            </h1>
+            </h2>
             <div class="text-sm mb-0 py-0 align-items-center d-flex justify-content-end">
               <samp class="mr-2 text-end"
               :style="{ color: 'white'  }"> Total de personas que forman parte del registro:     </samp>
             <DefaultCounterCard
-             color="light"
-            class="ml-3 "
+            color="light"
+            class="ml-3 small-counter-card"
             :count="10"
             suffix="+"
             :duration="3000"
-            divider="vertical"/>
+            divider="vertical"
+            style="width: 80px; height: 80px; font-size: 2px;"
+            />
           </div>
         </div>
         <RouterLink to="/pages/landing-pages/Registro"> 
@@ -87,10 +94,10 @@ onUnmounted(() => {
           <MaterialButton variant="gradient" color="primary" class="w-auto mt-1">
             Registrarse
           </MaterialButton>
-         </div>
+        </div>
         </RouterLink>
         </div>
-         </div>
+        </div>
     </div>
   </Header>
   
@@ -239,5 +246,10 @@ export default {
   100% {
     transform: translateX(0);
   }
+}
+.small-counter-card {
+  width:2px; 
+  height: 2px;
+  font-size: 8px;
 }
 </style>

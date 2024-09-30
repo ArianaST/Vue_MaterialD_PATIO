@@ -24,6 +24,7 @@ import ElProgressBars from "../layouts/sections/elements/progress-bars/ProgressB
 import ElToggles from "../layouts/sections/elements/toggles/TogglesView.vue";
 import ElTypography from "../layouts/sections/elements/typography/TypographyView.vue";
 import Registro from "../views/LandingPages/Registro.vue";
+import Datos from "../views/LandingPages/Datos.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -152,6 +153,11 @@ const router = createRouter({
       path: "/pages/landing-pages/Registro",
       name: "Registro",
       component: Registro,
+    },
+    {
+      path: "/pages/landing-pages/Datos",
+      name: "Datos",
+      component: Datos,
     },
   ],
 });

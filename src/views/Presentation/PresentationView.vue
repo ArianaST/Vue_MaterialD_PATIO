@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { onMounted, onUnmounted } from "vue";
 import { RouterLink } from "vue-router";
 
@@ -252,4 +252,4 @@ export default {
   height: 2px;
   font-size: 8px;
 }
-</style>
+</style> -->

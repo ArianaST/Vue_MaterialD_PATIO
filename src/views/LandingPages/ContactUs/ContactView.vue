@@ -6,7 +6,8 @@ import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "@/examples/footers/FooterDefault.vue";
 
 //image
-import image from "@/assets/img/illustrations/illustration-signin.jpg";
+import profilePic from "@/assets/img/PATITO.png";
+
 
 //material components
 import MaterialInput from "@/components/MaterialInput.vue";
@@ -44,7 +45,7 @@ onMounted(() => {
             <div
               class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
               :style="{
-                backgroundImage: `url(${image})`,
+                backgroundImage: `url(${profilePic})`,
                 backgroundSize: 'cover',
               }"
               loading="lazy"
@@ -60,16 +61,14 @@ onMounted(() => {
                 class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"
               >
                 <div
-                  class="bg-gradient-success shadow-success border-radius-lg p-3"
+                  class="bg-gradient-primary shadow-success border-radius-lg p-3"
                 >
-                  <h3 class="text-white text-success mb-0">Contact us</h3>
+                  <h3 class="text-white text-success mb-0">Contactanos</h3>
                 </div>
               </div>
               <div class="card-body">
                 <p class="pb-3">
-                  For further questions, including partnership opportunities,
-                  please email hello@creative-tim.com or contact using our
-                  contact form.
+                  Somos PATITO
                 </p>
                 <form id="contact-form" method="post" autocomplete="off">
                   <div class="card-body p-0 my-3">
@@ -78,33 +77,41 @@ onMounted(() => {
                         <MaterialInput
                           class="input-group-static mb-4"
                           type="text"
-                          label="Full Name"
-                          placeholder="Full Name"
+                          label="Nombre completo"
+                          placeholder="Nombre completo"
                         />
                       </div>
                       <div class="col-md-6 ps-md-2">
                         <MaterialInput
                           class="input-group-static mb-4"
                           type="email"
-                          label="Email"
-                          placeholder="hello@creative-tim.com"
+                          label="Correo electronico"
+                          placeholder="hello@example-tim.com"
                         />
                       </div>
+                    </div>
+                    <div class="col-md-6 ps-md-2">
+                        <MaterialInput
+                          class="input-group-static mb-4"
+                          type="text"
+                          label="Compañia"
+                          placeholder="Compañia"
+                      />
                     </div>
                     <div class="form-group mb-0 mt-md-0 mt-4">
                       <MaterialTextArea
                         id="message"
                         class="input-group-static mb-4"
                         :rows="6"
-                        placeholder="Describe your problem in at least 250 characters"
-                        >How can we help you?</MaterialTextArea
+                        placeholder="Mensaje de maximo 250 caracteres"
+                        >Dejanos un mensaje</MaterialTextArea
                       >
                     </div>
                     <div class="row">
                       <div class="col-md-12 text-center">
                         <MaterialButton
                           variant="gradient"
-                          color="success"
+                          color="primary"
                           class="mt-3 mb-0"
                           >Send Message</MaterialButton
                         >
@@ -121,3 +128,7 @@ onMounted(() => {
   </section>
   <DefaultFooter />
 </template>
+
+<style scoped>
+
+</style>

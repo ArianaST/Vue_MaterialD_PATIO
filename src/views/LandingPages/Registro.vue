@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 //example components
 import NavbarDefault from "../../examples/navbars/NavbarDefault.vue";
@@ -16,9 +16,39 @@ import MaterialButton from "@/components/MaterialButton.vue";
 //dep
 import Typed from "typed.js";
 
+const isModalVisible = ref(true);
+const showErrorAnimation = ref(false);
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+const handleClose = () => {
+  showErrorAnimation.value = true;
+  setTimeout(() => {
+    showErrorAnimation.value = false;
+  }, 80);
+};
 
 const body = document.getElementsByTagName("body")[0];
 //hooks
+onMounted(() => {
+  body.classList.add("about-us");
+  body.classList.add("bg-gray-200");
+
+  if (document.getElementById("typed")) {
+    // eslint-disable-next-line no-unused-vars
+    var typed = new Typed("#typed", {
+      stringsElement: "#typed-strings",
+      typeSpeed: 90,
+      backSpeed: 90,
+      backDelay: 200,
+      startDelay: 500,
+      loop: true,
+    });
+  }
+});
+
 onMounted(() => {
   body.classList.add("about-us");
   body.classList.add("bg-gray-200");
@@ -46,45 +76,39 @@ onUnmounted(() => {
 </script>
 
 <template>
-<div class="modal show fade  "  style="display: block;" aria-hidden="true" >
-  <div class="modal-overlay" >
-
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Aviso de privacidad</h5>
-          <MaterialButton
-                  color="none"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close">
-                </MaterialButton>
-        </div>
-        <div class="modal-body">
-          Society has put up so many boundaries, so many limitations on
-          what’s right and wrong that it’s almost impossible to get a pure
-          thought out.
-          <br /><br />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus culpa recusandae quisquam ipsam aliquam corporis molestiae provident necessitatibus maiores voluptatum repellendus ducimus labore totam ipsum vero eaque, quia amet voluptates?
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nemo molestias aperiam rem velit ea voluptas quibusdam quis delectus! Aspernatur provident sunt dolores optio, vel porro a dicta aut earum!
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam facere tempora optio voluptates veritatis vitae quod quisquam officiis repellendus ad, eligendi eveniet modi sapiente dignissimos laborum accusantium voluptatem obcaecati mollitia.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae enim repellendus, dolor impedit assumenda iusto reiciendis eos labore commodi ipsam sed ratione, fugit illum, quod vero quasi. Minus, nobis maiores.
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-          Eligendi placeat amet consectetur soluta maxime aut commodi, minima voluptas culpa mollitia facilis autem a quae ipsum error tenetur non ipsam nemo?</p>
-        </div>
-        <div class="modal-footer justify-content-end">
-          <MaterialButton
-                  variant="gradient"
-                  color="success"
-                  data-bs-dismiss="modal"
-                  @click="closeModal">
-            Acepto el aviso de privacidad
-          </MaterialButton>
+<div v-if="isModalVisible" class="modal show fade" style="display: block;" aria-hidden="true">
+    <div class="modal-overlay">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Aviso de privacidad</h5>
+            <MaterialButton
+              color="none"
+              class="btn-close"
+              @click="handleClose"
+              aria-label="Close">
+            </MaterialButton>
+          </div>
+          <div class="modal-body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus culpa recusandae quisquam ipsam aliquam corporis molestiae provident necessitatibus maiores voluptatum repellendus ducimus labore totam ipsum vero eaque, quia amet voluptates?
+  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nemo molestias aperiam rem velit ea voluptas quibusdam quis delectus! Aspernatur provident sunt dolores optio, vel porro a dicta aut earum!
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam facere tempora optio voluptates veritatis vitae quod quisquam officiis repellendus ad, eligendi eveniet modi sapiente dignissimos laborum accusantium voluptatem obcaecati mollitia.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae enim repellendus, dolor impedit assumenda iusto reiciendis eos labore commodi ipsam sed ratione, fugit illum, quod vero quasi. Minus, nobis maiores.
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+      Eligendi placeat amet consectetur soluta maxime aut commodi, minima voluptas culpa mollitia facilis autem a quae ipsum error tenetur non ipsam nemo?</p>
+          </div>
+          <div class="modal-footer justify-content-end">
+            <MaterialButton
+              variant="gradient"
+              color="success"
+              @click="closeModal">
+              Acepto el aviso de privacidad
+            </MaterialButton>
+          </div>
         </div>
       </div>
+    </div>
   </div>
-</div>
-</div>
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -149,12 +173,6 @@ onUnmounted(() => {
               </div>
           <div>
     <Formulario/>
-    <div class="row d-flex mx-auto py-3">
-          <MaterialButton  variant="gradient" @onclick="Registrarse" color="primary" class="w-auto mt-1">
-            Registrarse
-          </MaterialButton>
-        </div>
-
             </div>
           </div>
           </div>
@@ -165,27 +183,6 @@ onUnmounted(() => {
   <DefaultFooter/>
 </template>
  
-<script>
-export default {
-  data() {
-    return {
-      isModalVisible: true,
-      showErrorAnimation: false,
-    };
-  },
-  methods: {
-    closeModal() {
-      this.isModalVisible = false;
-    },
-    handleClose() {
-      this.showErrorAnimation = true;
-      setTimeout(() => {
-        this.showErrorAnimation = false;
-      }, 80);
-    },
-  },
-};
-</script>
 
 <style scoped>
 .modal {
@@ -213,6 +210,21 @@ export default {
 }
 
 .modal-dialog {
-  z-index: auto;
+  background-color: white;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1060;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 </style>

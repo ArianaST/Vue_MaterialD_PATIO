@@ -83,9 +83,6 @@ onUnmounted(() => {
     <Banner/>
     <Beneficiarios/>
     <Participantes/>
-    <!-- <AboutTeam />
-    <Featuring />
-    <Newsletter /> -->
   </div>
   <DefaultFooter />
 </template>

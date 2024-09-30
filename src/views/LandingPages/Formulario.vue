@@ -149,12 +149,14 @@
     <label> He firmado y acepto la carta de CONSENTIMIENTO informada, asimismo se encuentra completa para descargar en: link</label>
   </div>
   </div>
+  <button @click="guardarDatos" class="btn-guardar">Guardar Datos</button>
 </template>
 
 <script>
 //Vue Material Kit 2 Pro components
 import MaterialSwitch from "/src/components/MaterialSwitch.vue";
 import MaterialInput from "/src/components/MaterialInput.vue";
+import MaterialButton from "@/components/MaterialButton.vue";
 
 export default {
   data() {
@@ -321,8 +323,8 @@ textarea {
 
 /* Estilo del botón del formulario */
 button {
-
-  color: rgb(5, 5, 5);
+  color: rgb(255, 255, 255);
+  background-color: #840705;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;

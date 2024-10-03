@@ -19,9 +19,12 @@ import Typed from "typed.js";
 const isModalVisible = ref(true);
 const showErrorAnimation = ref(false);
 
+
 const closeModal = () => {
   isModalVisible.value = false;
 };
+
+
 
 const handleClose = () => {
   showErrorAnimation.value = true;
@@ -73,45 +76,46 @@ onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
 });
+
+
 </script>
 
 <template>
+
 <div v-if="isModalVisible" class="modal show fade" style="display: block;" aria-hidden="true">
-    <div class="modal-overlay">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Aviso de privacidad</h5>
-            <MaterialButton
-              color="none"
-              class="btn-close"
-              @click="handleClose"
-              aria-label="Close">
-            </MaterialButton>
-          </div>
-          <div class="modal-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus culpa recusandae quisquam ipsam aliquam corporis molestiae provident necessitatibus maiores voluptatum repellendus ducimus labore totam ipsum vero eaque, quia amet voluptates?
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla nemo molestias aperiam rem velit ea voluptas quibusdam quis delectus! Aspernatur provident sunt dolores optio, vel porro a dicta aut earum!
-  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam facere tempora optio voluptates veritatis vitae quod quisquam officiis repellendus ad, eligendi eveniet modi sapiente dignissimos laborum accusantium voluptatem obcaecati mollitia.
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae enim repellendus, dolor impedit assumenda iusto reiciendis eos labore commodi ipsam sed ratione, fugit illum, quod vero quasi. Minus, nobis maiores.
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-      Eligendi placeat amet consectetur soluta maxime aut commodi, minima voluptas culpa mollitia facilis autem a quae ipsum error tenetur non ipsam nemo?</p>
-          </div>
-          <div class="modal-footer justify-content-end">
-            <MaterialButton
-              variant="gradient"
-              color="success"
-              @click="closeModal">
-              Acepto el aviso de privacidad
-            </MaterialButton>
-          </div>
+    <div class="modal-overlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aviso de privacidad</h5>
+          <MaterialButton
+            color="none"
+            class="btn-close"
+            @click="handleClose"
+            aria-label="Close">
+          </MaterialButton>
+        </div>
+        <div class="modal-body"> 
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia perferendis facere quis, aliquid deserunt quasi, optio id eos dignissimos esse totam dicta aspernatur asperiores debitis nam ex, assumenda quisquam. Odio?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis rem ducimus officiis pariatur, veritatis dolorem perspiciatis? Amet praesentium, quaerat laboriosam quam alias excepturi mollitia dolorum quidem quas temporibus ab quod.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, temporibus? Est cupiditate eos dolor! Aperiam, ab? Voluptatum deleniti vitae repellat necessitatibus veritatis dolores tenetur temporibus sequi, minima molestias explicabo similique!
+          </p>
+          
+        </div>
+        <div class="modal-footer justify-content-end">
+          <MaterialButton
+            variant="gradient"
+            color="primary"
+            @click="closeModal">
+            Acepto el aviso de privacidad
+          </MaterialButton>
         </div>
       </div>
     </div>
   </div>
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
-      <div class="col-12">
+      <div class="col-10">
         <NavbarDefault :sticky="true" />
       </div>
     </div>
@@ -135,7 +139,7 @@ onUnmounted(() => {
               <h1>tool</h1>
             </div>
             <p class="lead mb-4 py-2 text-white opacity-8">
-              Total de registros actualmente +120  
+              Total de registros actualmente +120
             </p>
 
           </div>
@@ -182,43 +186,33 @@ onUnmounted(() => {
 </div>
   <DefaultFooter/>
 </template>
- 
 
 <style scoped>
-.modal {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.modal.show {
-  display: block;
-  opacity: 1;
-}
-
 .modal-overlay {
-  position: auto;
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: auto;
-  justify-content: center;
-  align-items: center;
-  z-index: auto;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1050;
 }
 
 .modal-dialog {
   background-color: white;
   border-radius: 5px;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   z-index: 1060;
+  position: relative;
+  margin: 0 auto;
+  top: 10%;
 }
 
 .modal-content {
   padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .btn-close {

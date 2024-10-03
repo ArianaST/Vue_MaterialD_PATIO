@@ -69,6 +69,13 @@
           <option v-for="estado in estadosNacimiento" :key="estado" :value="estado">{{ estado }}</option>
         </select>
       </div>
+      <div class="form-group">
+        <label for="estadoRecidencia">Estado de residencia:</label>
+        <select id="estadoRecidencia" v-model="formData.estadoRecidencia">
+          <option value="">Seleccione</option>
+          <option v-for="estado in estadosRecidencia" :key="estado" :value="estado">{{ estado }}</option>
+        </select>
+      </div>
     </div>
 
     <div v-if="currentTab === '02'" class="tab-content">
@@ -106,25 +113,53 @@
     </div>
     <div v-if="currentTab === '03'" class="tab-content">
     <h3>03. Función cognitiva</h3>
-    <div class="form-group">
-      <label for="imagen1">Imagen 1:</label>
+    <div class="form-group py-3 ">
+      <h6> Si ya cuentas con imagenes de espirales y ondas subirlas en los apartados de a continuación: </h6>
+      <label  class="text-center py-3" for="imagen1"> SUBIR IMAGEN DE ESPIRAL:</label>
       <input type="file" id="imagen1" @change="onFileSelected($event, 'imagen1')" accept="image/*">
       <img v-if="formData.imagen1" :src="formData.imagen1" alt="Vista previa imagen 1" class="preview-image">
     </div>
 
-    <div class="form-group">
-      <label for="imagen2">Imagen 2:</label>
+    <div class="form-group py-4">
+      <label class="text-center py-3" for="imagen2">SUBIR IMAGEN DE ONDA:</label>
       <input type="file" id="imagen2" @change="onFileSelected($event, 'imagen2')" accept="image/*">
       <img v-if="formData.imagen2" :src="formData.imagen2" alt="Vista previa imagen 2" class="preview-image">
     </div>
 
-    <div class="form-group mb-2">
+
+    <div class="canvas-container">
+        <div class="canvas-item">
+          <h6> En caso de no contar con imagenes en la sección de abajo dibuje la onda o espiral ya sea el caso:</h6>
+          <h4>Dibujar Onda</h4>
+          <canvas ref="canvasOnda" width="300" height="300" class="canvas" @mousemove="checkInitCanvas('onda')"></canvas>
+          <div class="button-group">
+            <button @click="clearCanvas('onda')">Borrar Onda</button>
+            <button @click="saveCanvas('onda')">Mandar Onda</button>
+          </div>
+          <img v-if="formData.onda" :src="formData.onda" alt="Vista previa de Onda" class="preview-image">
+        </div>
+
+        <div class="canvas-item">
+          <h4>Dibujar Espiral</h4>
+          <canvas ref="canvasEspiral" width="300" height="300" class="canvas" @mousemove="checkInitCanvas('espiral')"></canvas>
+          <div class="button-group">
+            <button @click="clearCanvas('espiral')">Borrar Espiral</button>
+            <button @click="saveCanvas('espiral')">Mandar Espiral</button>
+          </div>
+          <img v-if="formData.espiral" :src="formData.espiral" alt="Vista previa de Espiral" class="preview-image">
+        </div>
+      </div>
+
+
+      <div class="form-group mb-2 py-5">
       <label for="video">Video (Webcam):</label>
       <button @click="startWebcam" v-if="!isRecording">Iniciar Webcam</button>
       <button @click="stopWebcam" v-if="isRecording">Detener y Guardar</button>
       <video ref="webcam" v-show="isRecording" autoplay></video>
       <img v-if="formData.video" :src="formData.video" alt="GIF capturado" class="preview-video">
     </div>
+
+
   </div>
 
   <div class="form-check form-switch py-2">
@@ -149,14 +184,11 @@
     <label> He firmado y acepto la carta de CONSENTIMIENTO informada, asimismo se encuentra completa para descargar en: link</label>
   </div>
   </div>
-  <button @click="guardarDatos" class="btn-guardar">Guardar Datos</button>
+  <button @click="guardarDatos" class="btn-guardar mt-4">Guardar Datos</button>
 </template>
 
 <script>
-//Vue Material Kit 2 Pro components
-import MaterialSwitch from "/src/components/MaterialSwitch.vue";
-import MaterialInput from "/src/components/MaterialInput.vue";
-import MaterialButton from "@/components/MaterialButton.vue";
+
 
 export default {
   data() {
@@ -178,11 +210,14 @@ export default {
         ocupacion: '',
         genero: '',
         estadoNacimiento: '',
+        estadoRecidencia: '',
         bajoTratamiento: '',
         medicacion: '',
         EscalaMedicion:'',
         MDS_UPDRS: '',
         video: null,
+        onda: null,
+        espiral: null
       },
       isRecording: false,
       mediaStream: null,
@@ -196,9 +231,24 @@ export default {
         'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
         'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala',
         'Veracruz', 'Yucatán', 'Zacatecas', 'Ciudad de México'
-      ]
+      ],
+      estadosRecidencia: [
+        'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche',
+        'Chiapas', 'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato',
+        'Guerrero', 'Hidalgo', 'Jalisco', 'México', 'Michoacán', 'Morelos',
+        'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
+        'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala',
+        'Veracruz', 'Yucatán', 'Zacatecas', 'Ciudad de México'
+      ],
+      isDrawing: false,
+      contextOnda: null,
+      contextEspiral: null,
+      initializedCanvasOnda: false,
+      initializedCanvasEspiral: false,
     }
   },
+
+
   methods: {
     onFileSelected(event, field) {
     const file = event.target.files[0];
@@ -247,30 +297,102 @@ export default {
     });
     this.gifRecorder.render();
   },
+  
   guardarDatos() {
     const datosParaGuardar = { ...this.formData };
-    ['imagen1', 'imagen2', 'video'].forEach(field => {
+    ['imagen1', 'imagen2', 'video', 'onda', 'espiral'].forEach(field => {
       if (datosParaGuardar[field]) {
-        datosParaGuardar[field] = `[${field} cargado]`;
+        datosParaGuardar[field] = `[${field} cargado...]`;
       }
     });
     
     console.log('Datos del formulario:', JSON.stringify(datosParaGuardar, null, 2));
-    }
-  }
-}
+    },
+    
+    checkInitCanvas(type) {
+      if (type === 'onda' && !this.initializedCanvasOnda) {
+        this.initCanvasOnda();
+        this.initializedCanvasOnda = true;
+      } else if (type === 'espiral' && !this.initializedCanvasEspiral) {
+        this.initCanvasEspiral();
+        this.initializedCanvasEspiral = true;
+      }
+    },
+
+    initCanvasOnda() {
+      const canvasOnda = this.$refs.canvasOnda;
+      this.contextOnda = canvasOnda.getContext('2d');
+      canvasOnda.addEventListener('mousedown', this.startDrawingOnda);
+      canvasOnda.addEventListener('mousemove', this.drawOnda);
+      canvasOnda.addEventListener('mouseup', this.stopDrawingOnda);
+    },
+
+    initCanvasEspiral() {
+      const canvasEspiral = this.$refs.canvasEspiral;
+      this.contextEspiral = canvasEspiral.getContext('2d');
+      canvasEspiral.addEventListener('mousedown', this.startDrawingEspiral);
+      canvasEspiral.addEventListener('mousemove', this.drawEspiral);
+      canvasEspiral.addEventListener('mouseup', this.stopDrawingEspiral);
+    },
+
+    // Métodos para dibujar en los canvas de onda y espiral
+    startDrawingOnda(event) {
+      this.isDrawing = true;
+      this.contextOnda.beginPath();
+      this.contextOnda.moveTo(event.offsetX, event.offsetY);
+    },
+    drawOnda(event) {
+      if (!this.isDrawing) return;
+      this.contextOnda.lineTo(event.offsetX, event.offsetY);
+      this.contextOnda.stroke();
+    },
+    stopDrawingOnda() {
+      this.isDrawing = false;
+    },
+
+    startDrawingEspiral(event) {
+      this.isDrawing = true;
+      this.contextEspiral.beginPath();
+      this.contextEspiral.moveTo(event.offsetX, event.offsetY);
+    },
+    drawEspiral(event) {
+      if (!this.isDrawing) return;
+      this.contextEspiral.lineTo(event.offsetX, event.offsetY);
+      this.contextEspiral.stroke();
+    },
+    stopDrawingEspiral() {
+      this.isDrawing = false;
+    },
+
+    // Limpiar canvas
+    clearCanvas(type) {
+      if (type === 'onda') {
+        this.contextOnda.clearRect(0, 0, 300, 300);
+      } else if (type === 'espiral') {
+        this.contextEspiral.clearRect(0, 0, 300, 300);
+      }
+    },
+
+    // Guardar el dibujo del canvas
+    saveCanvas(type) {
+      if (type === 'onda') {
+        this.formData.onda = this.$refs.canvasOnda.toDataURL('image/png');
+      } else if (type === 'espiral') {
+        this.formData.espiral = this.$refs.canvasEspiral.toDataURL('image/png');
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-/* Contenedor del formulario */
 .form-container {
   max-width: auto;
   padding: 20px;
-  border: 2px solid #840705; /* Cambia el color del borde del formulario */
-  border-radius: 10px; /* Puedes ajustar el radio del borde si lo deseas */
+  border: 2px solid #840705;
+  border-radius: 10px;
 }
 
-/* Espaciado del texto de bienvenida */
 h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -295,8 +417,6 @@ h2 {
   color: white;
 }
 
-
-/* Estilo de los labels */
 label {
   display: block;
   margin-bottom: 5px;
@@ -318,12 +438,12 @@ textarea {
 
 /* Cambiar borde de las áreas de texto */
 textarea {
-  resize: vertical; 
+  resize: vertical;
 }
 
 /* Estilo del botón del formulario */
 button {
-  color: rgb(255, 255, 255);
+  color: rgb(37, 35, 35);
   background-color: #840705;
   padding: 10px 20px;
   border: none;
@@ -331,14 +451,13 @@ button {
   cursor: pointer;
 }
 
-/* Estilo del carrusel */
 .carousel {
-  border: 3px solid white; /* Borde blanco */
-  border-radius: 50%; /* Hacer el borde circular */
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); /* Resaltado del borde */
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* Estilo de las imágenes previas (opcional) */
+
 .preview-image, .preview-video {
   max-width: 200px;
   max-height: 200px;
@@ -351,4 +470,35 @@ max-width: 320px;
 max-height: 240px;
 margin-top: 10px;
 }
+
+.canvas {
+  border: 1.5px solid #000;
+  margin-bottom: 10px;
+}
+
+.preview-image {
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+  border: 2px solid #840705;
+  border-radius: 10px;
+}
+.canvas-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.canvas-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 </style>

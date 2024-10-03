@@ -6,9 +6,6 @@ import NavbarDefault from "../../examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../../examples/footers/FooterDefault.vue";
 import MapaMexico from "./MapaMexico.vue";
 import DatosRelevantes from "./DatosRelevantes.vue";
-//Vue Material Kit 2 components
-import MaterialAvatar from "@/components/MaterialAvatar.vue";
-import MaterialButton from "@/components/MaterialButton.vue";
 
 //image
 import bg0 from "@/assets/img/HeaderInicio.png";
@@ -65,14 +62,15 @@ onUnmounted(() => {
 
   <header class="bg-gradient-dark">
     <div
-      class="page-header min-vh-75"
+      class="page-header min-vh-95"
       :style="{ backgroundImage: `url(${bg0})` }"
     >
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
-            <h1 class="text-white">
+            <h1 class="text mb-0"
+            :style="{ color: '#840705'  }">
               Total de pacientes que forman parte del registro <span class="text-white" id="typed"></span>
             </h1>
             <div id="typed-strings">
@@ -80,7 +78,7 @@ onUnmounted(() => {
               <h1>design</h1>
               <h1>tool</h1>
             </div>
-            <p class="lead mb-4 text-white opacity-8">
+            <p class="lead mb-4 py-2 text-white opacity-8">
               Total de registros actualmente +120  
             </p>
           </div>
@@ -128,7 +126,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Estilo de los tabs */
+
 .tabs {
   display: flex;
   justify-content: center;

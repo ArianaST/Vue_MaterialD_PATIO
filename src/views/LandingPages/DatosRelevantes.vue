@@ -1,9 +1,10 @@
   
   <template>
     <section class="data-display">
+      <p class=" mb-0"> ¡Conoce cuantas personas han participado! </p>
       <div class="logo-container">
         <img src="@/assets/img/PATITO.png" alt="PaTO Logo" class="logo">
-        <h2>PaTO</h2>
+        <h2 class="mb-0">PATITO</h2>
       </div>
       <div class="info-cards">
         <div class="card total-records">
@@ -56,7 +57,6 @@ export default {
 <style scoped>
 .data-display {
   text-align: center;
-  font-family: 'Arial', sans-serif;
   padding: 20px;
 }
 
@@ -68,7 +68,7 @@ export default {
 }
 
 .logo {
-  width: 80px; 
+  width: 180px; 
   margin-bottom: 10px;
 }
 

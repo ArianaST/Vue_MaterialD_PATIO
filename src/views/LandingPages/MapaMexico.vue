@@ -1,14 +1,11 @@
 <template>
   <div class="ContainerTabs">
-  
-
-   
       <div class="mapa-container">
       <div class="mapa-svg" v-html="svgMapa" @click="resetSeleccion"></div>
       <div v-if="estadoSeleccionado" class="info-estado">
         <h2>{{ infoEstados[estadoSeleccionado]?.nombre }}</h2>
         <p>Capital: {{ infoEstados[estadoSeleccionado]?.capital }}</p>
-        <p>Población: {{ infoEstados[estadoSeleccionado]?.poblacion }}</p>
+        <p>Total de registros: {{ infoEstados[estadoSeleccionado]?.registros }}</p>
       </div>
     </div>
 
@@ -22,7 +19,9 @@
   </template>
   
   <script>
-  import { ref, onMounted } from 'vue';
+  import { registerRuntimeCompiler } from 'vue';
+import { ref, onMounted } from 'vue';
+import Registro from './Registro.vue';
   // import { Bar } from 'vue-chartjs'
   // import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
   // ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
@@ -38,38 +37,38 @@
       const svgMapa = ref('');
       const estadoSeleccionado = ref(null);
       const infoEstados = {
-        MXSON: { nombre: "sonora", capital: "Redacted", poblacion: "redacted" },
-        MXBCN: { nombre: "Baja California", capital: "Redacted", poblacion: "redacted" },
-        MXCHH: { nombre: "Chihuahua", capital: "Redacted", poblacion: "redacted" },
-        MXCOA: { nombre: "Coahuila", capital: "Redacted", poblacion: "redacted" },
-        MXTAM: { nombre: "Tamaulipas", capital: "Redacted", poblacion: "redacted" },
-        MXNLE: { nombre: "Nuevo leon", capital: "Redacted", poblacion: "redacted" },
-        MXROO: { nombre: "Quintana Roo", capital: "Redacted", poblacion: "redacted" },
-        MXCAM: { nombre: "Campeche", capital: "Redacted", poblacion: "redacted" },
-        MXTAB: { nombre: "Tabasco", capital: "Redacted", poblacion: "redacted" },
-        MXCHP: { nombre: "Chiapas", capital: "Redacted", poblacion: "redacted" },
-        MXCOL: { nombre: "Colima", capital: "Redacted", poblacion: "redacted" },
-        MXNAY: { nombre: "Nayarit", capital: "Redacted", poblacion: "redacted" },
-        MXBCS: { nombre: "Baja California Sur", capital: "Redacted", poblacion: "redacted" },
-        MXSIN: { nombre: "Sinaloa", capital: "Redacted", poblacion: "redacted" },
-        MXYUC: { nombre: "Yucatan", capital: "Redacted", poblacion: "redacted" },
-        MXVER: { nombre: "Veracruz", capital: "Redacted", poblacion: "redacted" },
-        MXJAL: { nombre: "Jalisco", capital: "Redacted", poblacion: "redacted" },
-        MXMIC: { nombre: "Michoacan", capital: "Redacted", poblacion: "redacted" },
-        MXGRO: { nombre: "Guerrero", capital: "Redacted", poblacion: "redacted" },
-        MXOAX: { nombre: "Oaxaca", capital: "Redacted", poblacion: "redacted" },
-        MXMEX: { nombre: "Mexico", capital: "Redacted", poblacion: "redacted" },
-        MXPUE: { nombre: "Puebla", capital: "Redacted", poblacion: "redacted" },
-        MXMOR: { nombre: "Morelos", capital: "Redacted", poblacion: "redacted" },
-        MXQUE: { nombre: "Queretaro", capital: "Redacted", poblacion: "redacted" },
-        MXHID: { nombre: "Hidalgo", capital: "Redacted", poblacion: "redacted" },
-        MXGUA: { nombre: "Guanajuato", capital: "Redacted", poblacion: "redacted" },
-        MXSLP: { nombre: "San Luis Potosi", capital: "Redacted", poblacion: "redacted" },
-        MXZAC: { nombre: "Zacatecas", capital: "Redacted", poblacion: "redacted" },
-        MXAGU: { nombre: "Aguascalientes", capital: "Aguascalientes", poblacion: "1,425,607" },
-        MXDUR: { nombre: "Durango", capital: "Durango", poblacion: "1,832,650" },
-        MXTLA: { nombre: "Tlaxcala", capital: "Tlaxcala", poblacion: "1,342,977" },
-        MXCMX: { nombre: "Ciudad de México", capital: "Ciudad de México", poblacion: "9,209,944" },
+        MXSON: { nombre: "Sonora", capital: "Hermosillo", registros: "2" },
+        MXBCN: { nombre: "Baja California", capital: "Mexicali", registros: "redacted" },
+        MXCHH: { nombre: "Chihuahua", capital: "Chihuahua", registros: "redacted" },
+        MXCOA: { nombre: "Coahuila", capital: "Saltillo", registros: "redacted" },
+        MXTAM: { nombre: "Tamaulipas", capital: "Ciudad Victoria", registros: "redacted" },
+        MXNLE: { nombre: "Nuevo León", capital: "Monterrey", registros: "redacted" },
+        MXROO: { nombre: "Quintana Roo", capital: "Chetumal", registros: "redacted" },
+        MXCAM: { nombre: "Campeche", capital: "Campeche", registros: "redacted" },
+        MXTAB: { nombre: "Tabasco", capital: "Villahermos", registros: "redacted" },
+        MXCHP: { nombre: "Chiapas", capital: "Tuxtla Gutiérrez", registros: "redacted" },
+        MXCOL: { nombre: "Colima", capital: "Colima", registros: "redacted" },
+        MXNAY: { nombre: "Nayarit", capital: "Tepic", registros: "redacted" },
+        MXBCS: { nombre: "Baja California Sur", capital: "La Paz", registros: "redacted" },
+        MXSIN: { nombre: "Sinaloa", capital: "Culiacán Rosales", registros: "redacted" },
+        MXYUC: { nombre: "Yucatán", capital: "Mérida", registros: "redacted" },
+        MXVER: { nombre: "Veracruz", capital: "Xalapa", registros: "redacted" },
+        MXJAL: { nombre: "Jalisco", capital: "Guadalajara", registros: "redacted" },
+        MXMIC: { nombre: "Michoacán", capital: "Morelia", registros: "redacted" },
+        MXGRO: { nombre: "Guerrero", capital: "Chilpancingo", registros: "redacted" },
+        MXOAX: { nombre: "Oaxaca", capital: "Oaxaca de Juárez", registros: "redacted" },
+        MXMEX: { nombre: "México", capital: "México", registros: "redacted" },
+        MXPUE: { nombre: "Puebla", capital: "Puebla de Zaragoza", registros: "redacted" },
+        MXMOR: { nombre: "Morelos", capital: "Cuernavaca", registros: "redacted" },
+        MXQUE: { nombre: "Querétaro", capital: "Santiago de Querétaro", registros: "redacted" },
+        MXHID: { nombre: "Hidalgo", capital: "Pachuca", registros: "redacted" },
+        MXGUA: { nombre: "Guanajuato", capital: "Guanajuato", registros: "redacted" },
+        MXSLP: { nombre: "San Luis Potosí", capital: "San Luis Potosí", registros: "redacted" },
+        MXZAC: { nombre: "Zacatecas", capital: "Redacted", registros: "redacted" },
+        MXAGU: { nombre: "Aguascalientes", capital: "Aguascalientes", registros: "redacted" },
+        MXDUR: { nombre: "Durango", capital: "Durango", registros: "redacted" },
+        MXTLA: { nombre: "Tlaxcala", capital: "Tlaxcala", registros: "redacted" },
+        MXCMX: { nombre: "Ciudad de México", capital: "Ciudad de México", registros: "redacted" },
       };
   
       const cargarSVG = async () => {
@@ -162,7 +161,7 @@
   .info-estado {
     width: 25%;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 5px;
   }
   </style>

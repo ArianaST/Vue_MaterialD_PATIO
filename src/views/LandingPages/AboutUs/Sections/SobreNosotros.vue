@@ -23,22 +23,22 @@ onMounted(() => {
           </div>
           <div class="row py-7">
             <div
-              class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mx-auto"
+              class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-3 mx-auto"
             >
               <div
-                class="d-flex justify-content-between align-items-center mb-2"
+                class=" align-items-center text-center mb-2"
               >
-                <h3 class="mb-0">Sobre Nosotos</h3>
-                <h3 class="mb-0">¡Somos PATITO!</h3>
+                <h3 class="mb-2">Sobre Nosotros.... </h3>
               </div>
-              <p class="text-lg mb-0">
+              <h3 class="text-center mb-2">¡Somos PATITO!</h3>
+              <p class="text-lg mb-4">
                 Somos un resgistro mexicano que busca pacientes con la enfermedad de parkinson,PATITO tiene como 
                 finalidad recolectar datos demograficos, medicos, ambientales, cognitivos y de estilo de vida para mejorar mediante
                 estos datos la amplitud de la enfermedad de parkinson en la población mexicana... 
               </p>
               <div >
                 <MaterialButton variant="gradient" color="primary" class="w-auto me-9">Aviso de privacidad</MaterialButton>
-                <MaterialButton variant="gradient" color="primary" class="w-auto me-9">Carta de consentimiento</MaterialButton>
+                <MaterialButton variant="gradient" color="primary" class="w-auto">Carta de consentimiento</MaterialButton>
               </div>
             </div>
           </div>

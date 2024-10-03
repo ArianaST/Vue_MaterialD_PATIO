@@ -6,9 +6,10 @@ import NavbarDefault from "../../../examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../../../examples/footers/FooterDefault.vue";
 
 //image
-import bg0 from "@/assets/img/bg9.jpg";
+import bg0 from "@/assets/img/HeaderInicio.png";
+import profilePic from "@/assets/img/PATITO.png";
 
-//dep
+
 import Typed from "typed.js";
 
 //sections
@@ -62,7 +63,8 @@ onUnmounted(() => {
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
-            <h1 class="text-white">
+            <h1 class="mb-0"
+            :style="{ color: '#840705'  }">
               Total de pacientes que forman parte del registro <span class="text-white" id="typed"></span>
             </h1>
             <div id="typed-strings">
@@ -70,7 +72,7 @@ onUnmounted(() => {
               <h1>design</h1>
               <h1>tool</h1>
             </div>
-            <p class="lead mb-4 text-white opacity-8">
+            <p class="lead mb-4 py-2 text-white opacity-8">
               Total de registros actualmente +120  
             </p>
 

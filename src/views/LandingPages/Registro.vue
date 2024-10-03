@@ -13,7 +13,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
 import bg0 from "@/assets/img/HeaderInicio.png";
 import profilePic from "@/assets/img/PATITO.png";
 import MaterialButton from "@/components/MaterialButton.vue";
-//dep
+
 import Typed from "typed.js";
 
 const isModalVisible = ref(true);
@@ -23,8 +23,6 @@ const showErrorAnimation = ref(false);
 const closeModal = () => {
   isModalVisible.value = false;
 };
-
-
 
 const handleClose = () => {
   showErrorAnimation.value = true;

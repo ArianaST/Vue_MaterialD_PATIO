@@ -126,32 +126,31 @@
       <img v-if="formData.imagen2" :src="formData.imagen2" alt="Vista previa imagen 2" class="preview-image">
     </div>
 
-
+    <h6 clas="py-5"> EN CASO DE NO CONTAR CON IMAGENES, A CONTINUACIÓN SE PEDIRA QUE DIBUJE UNA ONDA Y UNA ESPIRAL EN  LOS SIGUIENTES ESPACIOS SIN SALIRSE DEL RECUADRO, AL TERMINAR	PRESIONAR EN GUARDAR EN CADA CASO:</h6>
     <div class="canvas-container">
         <div class="canvas-item">
-          <h6> En caso de no contar con imagenes en la sección de abajo dibuje la onda o espiral ya sea el caso:</h6>
-          <h4>Dibujar Onda</h4>
-          <canvas ref="canvasOnda" width="300" height="300" class="canvas" @mousemove="checkInitCanvas('onda')"></canvas>
+          <h4 class="text-center">Dibujar Espiral</h4>
+          <canvas ref="canvasOnda" width="330" height="300" class="canvas" @mousemove="checkInitCanvas('onda')"></canvas>
           <div class="button-group">
-            <button @click="clearCanvas('onda')">Borrar Onda</button>
-            <button @click="saveCanvas('onda')">Mandar Onda</button>
+            <button @click="clearCanvas('onda')">Borrar Espiral</button>
+            <button @click="saveCanvas('onda')">Mandar Espiral</button>
           </div>
           <img v-if="formData.onda" :src="formData.onda" alt="Vista previa de Onda" class="preview-image">
         </div>
 
         <div class="canvas-item">
-          <h4>Dibujar Espiral</h4>
-          <canvas ref="canvasEspiral" width="300" height="300" class="canvas" @mousemove="checkInitCanvas('espiral')"></canvas>
+          <h4 class="text-center">Dibujar Onda</h4>
+          <canvas ref="canvasEspiral" width="330" height="300" class="canvas" @mousemove="checkInitCanvas('espiral')"></canvas>
           <div class="button-group">
-            <button @click="clearCanvas('espiral')">Borrar Espiral</button>
-            <button @click="saveCanvas('espiral')">Mandar Espiral</button>
+            <button @click="clearCanvas('espiral')">Borrar Onda</button>
+            <button @click="saveCanvas('espiral')">Mandar Onda</button>
           </div>
           <img v-if="formData.espiral" :src="formData.espiral" alt="Vista previa de Espiral" class="preview-image">
         </div>
       </div>
 
-
-      <div class="form-group mb-2 py-5">
+      <h6 class="mt-5">SE PEDIRA PERMISOS PARA TENER ACCESO A LA CÁMARA DEL DISPOSITIVO EN USO PARA GRABAR SOLO 95 SEGUNDOS DE LA MANO DEL PACIENTE, CUANDO EL MISMO TERMINE SE DARA EN GUARDAR.</h6>
+      <div class="form-group py-3">
       <label for="video">Video (Webcam):</label>
       <button @click="startWebcam" v-if="!isRecording">Iniciar Webcam</button>
       <button @click="stopWebcam" v-if="isRecording">Detener y Guardar</button>
@@ -162,7 +161,7 @@
 
   </div>
 
-  <div class="form-check form-switch py-2">
+  <div class="form-check form-switch py-4">
     <input
       :id="id"
       class="form-check-input"
@@ -188,8 +187,6 @@
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
@@ -300,7 +297,7 @@ export default {
   
   guardarDatos() {
     const datosParaGuardar = { ...this.formData };
-    ['imagen1', 'imagen2', 'video', 'onda', 'espiral'].forEach(field => {
+    ['imagen1', 'imagen2', 'video', 'onda', 'espiral', 'contextOnda', 'contextEspiral'].forEach(field => {
       if (datosParaGuardar[field]) {
         datosParaGuardar[field] = `[${field} cargado...]`;
       }
@@ -334,8 +331,6 @@ export default {
       canvasEspiral.addEventListener('mousemove', this.drawEspiral);
       canvasEspiral.addEventListener('mouseup', this.stopDrawingEspiral);
     },
-
-    // Métodos para dibujar en los canvas de onda y espiral
     startDrawingOnda(event) {
       this.isDrawing = true;
       this.contextOnda.beginPath();
@@ -382,6 +377,7 @@ export default {
       }
     },
   },
+  
 };
 </script>
 
@@ -428,6 +424,7 @@ input[type="text"],
 input[type="date"],
 select,
 textarea {
+  color: rgb(0, 0, 0);
   width: 100%;
   padding: 10px;
   border: 2px solid #a0a0a0; /* Cambia el color del borde de los inputs */
@@ -436,14 +433,13 @@ textarea {
   font-size: 1rem;
 }
 
-/* Cambiar borde de las áreas de texto */
 textarea {
   resize: vertical;
 }
 
-/* Estilo del botón del formulario */
+
 button {
-  color: rgb(37, 35, 35);
+  color: rgb(0, 0, 0);
   background-color: #840705;
   padding: 10px 20px;
   border: none;
@@ -457,48 +453,50 @@ button {
   box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
 }
 
-
 .preview-image, .preview-video {
   max-width: 200px;
   max-height: 200px;
   margin-top: 10px;
-  border: 2px solid #840705;
+  border: 1px solid #840705;
   border-radius: 10px;
 }
-preview-video {
+.preview-video {
 max-width: 320px;
 max-height: 240px;
 margin-top: 10px;
 }
 
-.canvas {
-  border: 1.5px solid #000;
-  margin-bottom: 10px;
-}
-
-.preview-image {
-  max-width: 200px;
-  max-height: 200px;
-  margin-top: 10px;
-  border: 2px solid #840705;
-  border-radius: 10px;
-}
 .canvas-container {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center; /* Centrar los canvas en el eje horizontal */
+  align-items: flex-start; /* Alinear los canvas en la parte superior */
+  gap: 60px; /* Espacio entre los canvas */
+  margin: 20px auto; /* Centrar el contenedor de los canvas */
+  max-width: 800px; /* Limitar el ancho total para que no se peguen a los bordes */
 }
 
 .canvas-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.canvas {
+  border: 1.5px solid #000;
+  margin-bottom: 9px;
+  width: 350px; /* Ajustar el tamaño del canvas si es necesario */
+  height: 300px;
 }
 
 .button-group {
   display: flex;
   gap: 10px;
+  justify-content: center; /* Alinear los botones al centro */
   margin-top: 10px;
 }
+
+
+
 
 </style>

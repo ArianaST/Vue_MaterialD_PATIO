@@ -162,19 +162,19 @@ onUnmounted(() => {
               route=""
               component="twitter"
               color="twitter"
-              label="Tweet"
+              label="X"
             />
             <MaterialSocialButton
               route=""
               component="facebook-square"
               color="facebook"
-              label="Share"
+              label="Facebook"
             />
             <MaterialSocialButton
               route=""
-              component="pinterest"
-              color="pinterest"
-              label="Pin it"
+              component="instagram"
+              color="instagram"
+              label="Instagram"
             />
           </div>
         </div>

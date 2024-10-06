@@ -316,21 +316,32 @@ export default {
       }
     },
 
-    initCanvasOnda() {
-      const canvasOnda = this.$refs.canvasOnda;
-      this.contextOnda = canvasOnda.getContext('2d');
-      canvasOnda.addEventListener('mousedown', this.startDrawingOnda);
-      canvasOnda.addEventListener('mousemove', this.drawOnda);
-      canvasOnda.addEventListener('mouseup', this.stopDrawingOnda);
-    },
 
-    initCanvasEspiral() {
-      const canvasEspiral = this.$refs.canvasEspiral;
-      this.contextEspiral = canvasEspiral.getContext('2d');
-      canvasEspiral.addEventListener('mousedown', this.startDrawingEspiral);
-      canvasEspiral.addEventListener('mousemove', this.drawEspiral);
-      canvasEspiral.addEventListener('mouseup', this.stopDrawingEspiral);
-    },
+    initCanvasOnda() {
+  const canvasOnda = this.$refs.canvasOnda;
+  const containerWidth = canvasOnda.parentElement.clientWidth;
+  canvasOnda.width = containerWidth * 0.9; 
+  canvasOnda.height = canvasOnda.width * (300 / 330); 
+
+  this.contextOnda = canvasOnda.getContext('2d');
+  canvasOnda.addEventListener('mousedown', this.startDrawingOnda);
+  canvasOnda.addEventListener('mousemove', this.drawOnda);
+  canvasOnda.addEventListener('mouseup', this.stopDrawingOnda);
+},
+
+initCanvasEspiral() {
+  const canvasEspiral = this.$refs.canvasEspiral;
+  const containerWidth = canvasEspiral.parentElement.clientWidth;
+  canvasEspiral.width = containerWidth * 0.9;
+  canvasEspiral.height = canvasEspiral.width * (300 / 330);
+
+  this.contextEspiral = canvasEspiral.getContext('2d');
+  canvasEspiral.addEventListener('mousedown', this.startDrawingEspiral);
+  canvasEspiral.addEventListener('mousemove', this.drawEspiral);
+  canvasEspiral.addEventListener('mouseup', this.stopDrawingEspiral);
+},
+
+    
     startDrawingOnda(event) {
       this.isDrawing = true;
       this.contextOnda.beginPath();
@@ -359,15 +370,15 @@ export default {
       this.isDrawing = false;
     },
 
-    // Limpiar canvas
     clearCanvas(type) {
-      if (type === 'onda') {
-        this.contextOnda.clearRect(0, 0, 300, 300);
-      } else if (type === 'espiral') {
-        this.contextEspiral.clearRect(0, 0, 300, 300);
-      }
-    },
-
+  if (type === 'onda') {
+    const canvasOnda = this.$refs.canvasOnda;
+    this.contextOnda.clearRect(0, 0, canvasOnda.width, canvasOnda.height);
+  } else if (type === 'espiral') {
+    const canvasEspiral = this.$refs.canvasEspiral;
+    this.contextEspiral.clearRect(0, 0, canvasEspiral.width, canvasEspiral.height); 
+  }
+},
     // Guardar el dibujo del canvas
     saveCanvas(type) {
       if (type === 'onda') {
@@ -377,7 +388,6 @@ export default {
       }
     },
   },
-  
 };
 </script>
 
@@ -468,33 +478,33 @@ margin-top: 10px;
 
 .canvas-container {
   display: flex;
-  justify-content: center; /* Centrar los canvas en el eje horizontal */
-  align-items: flex-start; /* Alinear los canvas en la parte superior */
-  gap: 60px; /* Espacio entre los canvas */
-  margin: 20px auto; /* Centrar el contenedor de los canvas */
-  max-width: 800px; /* Limitar el ancho total para que no se peguen a los bordes */
+  justify-content: center; 
+  align-items: flex-start; 
+  flex-wrap: wrap;
 }
 
 .canvas-item {
+  flex-basis: 100%; /* Ajusta el tamaño al 100% del contenedor */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .canvas {
-  border: 1.5px solid #000;
-  margin-bottom: 9px;
-  width: 350px; /* Ajustar el tamaño del canvas si es necesario */
-  height: 300px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #a0a0a0; 
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button-group {
   display: flex;
+  justify-content: center;
   gap: 10px;
-  justify-content: center; /* Alinear los botones al centro */
   margin-top: 10px;
 }
+
 
 
 

@@ -1,26 +1,26 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-//example components
+
 import NavbarDefault from "../../examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../../examples/footers/FooterDefault.vue";
 import MapaMexico from "./MapaMexico.vue";
 import DatosRelevantes from "./DatosRelevantes.vue";
 
-//image
-import bg0 from "@/assets/img/HeaderInicio.png";
-import profilePic from "@/assets/img/PATITO.png";
 
-//dep
+import bg0 from "@/assets/img/HeaderInicio.png";
+
+
 import Typed from "typed.js";
 
-// Estado para los tabs
+
 const currentTab = ref('01');
 const tabs = [
   { id: '01', name: 'Mapa interactivo' },
   { id: '02', name: 'Edades' },
   { id: '03', name: 'Sexo' },
   { id: '04', name: 'Frecuencia de metales y pesticidas' },
+  { id: '05', name: 'Descargar los datos' },
 ];
 
 // Función para cambiar de tab
@@ -49,6 +49,9 @@ onUnmounted(() => {
   const body = document.body;
   body.classList.remove("about-us", "bg-gray-200");
 });
+
+
+
 </script>
 
 <template>
@@ -109,41 +112,127 @@ onUnmounted(() => {
       </div>
       <div v-else-if="currentTab === '02'">
         <h2>Contenido para la pestaña de Edades</h2>
-        <!-- Añade aquí el contenido para la pestaña de Edades -->
+        <!-- contenido para la pestaña de Edades -->
       </div>
       <div v-else-if="currentTab === '03'">
         <h2>Contenido para la pestaña de Sexo</h2>
-        <!-- Añade aquí el contenido para la pestaña de Sexo -->
+        <!-- l contenido para la pestaña de Sexo -->
       </div>
       <div v-else-if="currentTab === '04'">
         <h2>Contenido para la pestaña de Frecuencia de metales y pesticidas</h2>
-        <!-- Añade aquí el contenido para la pestaña de Frecuencia de metales y pesticidas -->
+        <!--  contenido para la pestaña de Frecuencia de metales y pesticidas -->
+      </div>
+      <div v-else-if="currentTab === '05'">
+        <h2>Aquí puedes descargar los datos del registro PATITO:</h2>
+        <div class="logo-buttons-container">
+    <!-- Botón 1 -->
+    <div class="logo-button" @click="downloadExcel">
+      <img src="@/assets/img/excel.png" alt="Logo Excel" class="logo-image">
+      <span>Descargar Excel</span>
+    </div>
+
+    <!-- Botón 2 -->
+    <div class="logo-button" @click="downloadJSON">
+      <img src="@/assets/img/json.png" alt="Logo JSON" class="logo-image">
+      <span>Descargar JSON</span>
+    </div>
       </div>
     </div>
   </div>
-
+  </div>
   <DefaultFooter />
 </template>
+
 
 <style scoped>
 
 .tabs {
   display: flex;
+  flex-wrap: wrap; 
   justify-content: center;
   margin-bottom: 30px;
 }
 
 .tabs button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   background-color: #f0f0f0;
   cursor: pointer;
-  margin: 0 5px;
-  transition: background-color 0.3s, color 0.3s;
+  margin: 10px 5px; 
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  border-radius: 8px; 
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .tabs button.active {
   background-color: #840705;
   color: white;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
+}
+
+@media (max-width: 768px) {
+  .tabs button {
+    font-size: 0.9rem; 
+    padding: 10px 18px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .tabs button {
+    font-size: 0.8rem; 
+    padding: 8px 16px;
+  }
+}
+
+.logo-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/*05 ESTILOS */
+.logo-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+}
+
+.logo-button:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+
+.logo-image {
+  width: 100px;
+  height: 80px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; 
+}
+
+.logo-button:hover .logo-image {
+  transform: scale(1.1); 
+}
+
+.logo-button span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
 }
 </style>

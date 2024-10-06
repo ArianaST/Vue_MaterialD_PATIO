@@ -9,12 +9,6 @@
       </div>
     </div>
 
-    <!-- <div v-if="currentTab === '02'" class="tab-content">
-      <div>
-       <BarChart :chartData="chartData" :options="chartOptions" />
-      </div>
-    </div> -->
-
   </div>
   </template>
   
@@ -64,7 +58,7 @@ import Registro from './Registro.vue';
         MXHID: { nombre: "Hidalgo", capital: "Pachuca", registros: "redacted" },
         MXGUA: { nombre: "Guanajuato", capital: "Guanajuato", registros: "redacted" },
         MXSLP: { nombre: "San Luis Potosí", capital: "San Luis Potosí", registros: "redacted" },
-        MXZAC: { nombre: "Zacatecas", capital: "Redacted", registros: "redacted" },
+        MXZAC: { nombre: "Zacatecas", capital: "Zacatecas", registros: "redacted" },
         MXAGU: { nombre: "Aguascalientes", capital: "Aguascalientes", registros: "redacted" },
         MXDUR: { nombre: "Durango", capital: "Durango", registros: "redacted" },
         MXTLA: { nombre: "Tlaxcala", capital: "Tlaxcala", registros: "redacted" },

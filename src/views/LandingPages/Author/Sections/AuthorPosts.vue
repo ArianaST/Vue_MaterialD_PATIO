@@ -18,28 +18,28 @@ import post4 from "@/assets/img/examples/blog2.jpg";
           <h2 class="mb-2">Cono</h2>
           <h2 class="text-gradient text-primary mb-0">cenos</h2>
         </div>
-          <p clas="mb-0" >Somos un equipo de investigadores y desarrolladores......</p>
+          <p clas="mb-0" >Somos un equipo de investigadores, organizaciones y desarrolladores......</p>
         </div>
       </div>
       <div class="row flex-wrap justify-content-between">
         <div class="col-lg-3 col-sm-6">
           <TransparentBlogCard
             :image="post1"
-            title="Rover raised $65 million"
+            title="Investigadores"
             description="Finding temporary housing for your dog should be as easy as renting an Airbnb. That’s the idea behind Rover ..."
           />
         </div>
         <div class="col-lg-3 col-sm-6">
           <TransparentBlogCard
             :image="post2"
-            title="MateLabs machine learning"
+            title="Organizaciones"
             description="If you’ve ever wanted to train a machine learning model and integrate it with IFTTT, you now can with ..."
           />
         </div>
         <div class="col-lg-3 col-sm-6">
           <TransparentBlogCard
             :image="post3"
-            title="MateLabs machine learning"
+            title="Pacientes"
             description="If you’ve ever wanted to train a machine learning model and integrate it with IFTTT, you now can with ..."
           />
         </div>
